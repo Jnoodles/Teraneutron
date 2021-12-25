@@ -93,9 +93,10 @@ void ptDecay(){
             paired.clear();
         }
     }
-
-
-
-
+    
+    TCanvas *c1 = new TCanvas();
+    teraneutron->Draw("e");
+    c1->Draw();
+    c1->SaveAs("teraneutron.root")
     cout <<"done!" <<endl;    
 }

@@ -64,7 +64,7 @@ void tetraNeutron(){
                 p2.SetPxPyPzE(px[k],py[k],pz[k],energy[k]);
                 r2.SetPxPyPzE(x[k],y[k],z[k],t[k]);
 
-                if(coalescence(p1,p2,r1,r2)==false) continue;
+                if(coalescence(p1,p2,r1,r2,t[j],t[k])==false) continue;
                 for(int l=k+1;l<nMultiplicityTree;l++){
                     //third particle
                     if(result==true)    break;
@@ -72,7 +72,7 @@ void tetraNeutron(){
                     TLorentzVector p3,r3;
                     p3.SetPxPyPzE(px[l],py[l],pz[l],energy[l]);
                     r3.SetPxPyPzE(x[l],y[l],z[l],t[l]);
-                    if(coalescence(p1,p3,r1,r3)==false || coalescence(p2,p3,r2,r3)==false)  continue;
+                    if(coalescence(p1,p3,r1,r3,t[j],t[l])==false || coalescence(p2,p3,r2,r3,t[k],t[l])==false)  continue;
                     
                     for(int m=l+1;m<nMultiplicityTree;m++){
                         //forth particle
@@ -80,9 +80,9 @@ void tetraNeutron(){
                         TLorentzVector p4,r4;
                         p4.SetPxPyPzE(px[m],py[m],pz[m],energy[m]);
                         r4.SetPxPyPzE(x[m],y[m],z[m],t[m]);
-                        if(colescence(p1,p4,r1,r4)==false) continue;
-                        if(coalescence(p2,p4,r2,r4)==false) continue;
-                        if(coalescence(p3,p4,r3,r4)==false) continue;
+                        if(colescence(p1,p4,r1,r4,t[j],t[m])==false) continue;
+                        if(coalescence(p2,p4,r2,r4,t[k],t[m])==false) continue;
+                        if(coalescence(p3,p4,r3,r4,t[l],t[m])==false) continue;
 
                         TLorentzVector four;
                         four=p1+p2+p3+p4;

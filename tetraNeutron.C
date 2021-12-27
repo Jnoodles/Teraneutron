@@ -12,7 +12,7 @@
 #include "TClonesArray.h"
 #include "coalescence.h"
 #include  "TLegend.h"
-/#include <omp.h>
+#include <omp.h>
 #define pi 3.14159
 using namespace std;
 
@@ -108,7 +108,7 @@ int main(){
         }
         paired.clear();
     }
-    
+    teraneutron->Scale(1.0/nentries);
     TCanvas *c1 = new TCanvas();
     teraneutron->Draw("e");
     teraneutron->GetXaxis()->SetTitle("p_{T} GeV");

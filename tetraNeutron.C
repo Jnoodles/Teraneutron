@@ -2,6 +2,7 @@
 #include "TBranch.h"
 #include "TLorentzVector.h"
 #include "TString.h"
+#include "TCanvas.h"
 #include "TFile.h"
 #include "TTree.h"
 #include "TVector3.h"
@@ -10,7 +11,8 @@
 #include "TH1F.h"
 #include "TClonesArray.h"
 #include "coalescence.h"
-#include <omp.h>
+#include  "TLegend.h"
+/#include <omp.h>
 #define pi 3.14159
 using namespace std;
 
@@ -40,12 +42,11 @@ int main(){
     hadronTree->SetBranchAddress("mass",mass);
     hadronTree->SetBranchAddress("energy",energy);
 
-	const Int_t nentries=hadronTree->GetEntries()/25000;
+	const Int_t nentries=hadronTree->GetEntries();
 
     cout<<"events: "<<nentries<<endl;
 
     vector<int> paired;
-
     for(int i=0;i<nentries;i++)
     {
 		hadronTree->GetEntry(i);
@@ -74,10 +75,11 @@ int main(){
                     p3.SetPxPyPzE(px[l],py[l],pz[l],energy[l]);
                     r3.SetPxPyPzE(x[l],y[l],z[l],t[l]);
                     if(coalescence(p1,p3,r1,r3,t[j],t[l])==false || coalescence(p2,p3,r2,r3,t[k],t[l])==false)  continue;
-                   // #pragma omp parallel
-                   #pragma omp parallel for schedule(dynamic)
+                    
+                    #pragma omp parallel
                     for(int m=l+1;m<nMultiplicityTree;m++){
                         //forth particle
+                        if(result==true)    continue;
                         if(std::find(paired.begin(),paired.end(),m) !=paired.end())    continue;
                         TLorentzVector p4,r4;
                         p4.SetPxPyPzE(px[m],py[m],pz[m],energy[m]);
@@ -97,7 +99,7 @@ int main(){
                         paired.push_back(l);
                         paired.push_back(m);
                         result=true;
-                        break;
+                        
                     }
                 }
 
@@ -109,8 +111,13 @@ int main(){
     
     TCanvas *c1 = new TCanvas();
     teraneutron->Draw("e");
+    teraneutron->GetXaxis()->SetTitle("p_{T} GeV");
+    teraneutron->GetYaxis()->SetTitle("#frac{1}{2#pip_{T}}d^{2}N/dp_{T}dy");
+    TLegend *leg1 = new TLegend();
+    leg1->AddEntry(teraneutron,"Tetraneutron");
     c1->Draw();
     c1->SaveAs("tetraneutron.root");
+
     cout <<"done!" <<endl;    
     return 0;
 }

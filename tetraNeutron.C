@@ -88,7 +88,7 @@ void tetraNeutron(){
                         four=p1+p2+p3+p4;
                         float pt = four.Perp();
                         float rapidity = four.Rapidity();
-                        if(rapidiyt>0.5 || rapidity<-0.5)   continue;
+                        if(rapidity>0.5 || rapidity<-0.5)   continue;
                         teraneutron->Fill(pt,1.0/(2.0*pi*0.05*pt));
                         paired.push_back(j);
                         paired.push_back(k);
@@ -108,6 +108,6 @@ void tetraNeutron(){
     TCanvas *c1 = new TCanvas();
     teraneutron->Draw("e");
     c1->Draw();
-    c1->SaveAs("teraneutron.root");
+    c1->SaveAs("tetraneutron.root");
     cout <<"done!" <<endl;    
 }

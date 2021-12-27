@@ -10,10 +10,11 @@
 #include "TH1F.h"
 #include "TClonesArray.h"
 #include "coalescence.h"
+#include <omp.h>
 #define pi 3.14159
 using namespace std;
 
-void tetraNeutron(){
+int main(){
     const Int_t maxMultiplicity = 50000;
     Float_t b;
     Int_t nMultiplicityTree,npart;
@@ -39,7 +40,7 @@ void tetraNeutron(){
     hadronTree->SetBranchAddress("mass",mass);
     hadronTree->SetBranchAddress("energy",energy);
 
-	const Int_t nentries=hadronTree->GetEntries();
+	const Int_t nentries=hadronTree->GetEntries()/25000;
 
     cout<<"events: "<<nentries<<endl;
 
@@ -73,14 +74,15 @@ void tetraNeutron(){
                     p3.SetPxPyPzE(px[l],py[l],pz[l],energy[l]);
                     r3.SetPxPyPzE(x[l],y[l],z[l],t[l]);
                     if(coalescence(p1,p3,r1,r3,t[j],t[l])==false || coalescence(p2,p3,r2,r3,t[k],t[l])==false)  continue;
-                    
+                   // #pragma omp parallel
+                   #pragma omp parallel for schedule(dynamic)
                     for(int m=l+1;m<nMultiplicityTree;m++){
                         //forth particle
                         if(std::find(paired.begin(),paired.end(),m) !=paired.end())    continue;
                         TLorentzVector p4,r4;
                         p4.SetPxPyPzE(px[m],py[m],pz[m],energy[m]);
                         r4.SetPxPyPzE(x[m],y[m],z[m],t[m]);
-                        if(colescence(p1,p4,r1,r4,t[j],t[m])==false) continue;
+                        if(coalescence(p1,p4,r1,r4,t[j],t[m])==false) continue;
                         if(coalescence(p2,p4,r2,r4,t[k],t[m])==false) continue;
                         if(coalescence(p3,p4,r3,r4,t[l],t[m])==false) continue;
 
@@ -110,4 +112,5 @@ void tetraNeutron(){
     c1->Draw();
     c1->SaveAs("tetraneutron.root");
     cout <<"done!" <<endl;    
+    return 0;
 }

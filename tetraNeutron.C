@@ -69,7 +69,6 @@ void tetraNeutron(){
                     //third particle
                     if(result==true)    break;
                     if(std::find(paired.begin(),paired.end(),l) !=paired.end())    continue;
-
                     TLorentzVector p3,r3;
                     p3.SetPxPyPzE(px[l],py[l],pz[l],energy[l]);
                     r3.SetPxPyPzE(x[l],y[l],z[l],t[l]);
@@ -88,6 +87,8 @@ void tetraNeutron(){
                         TLorentzVector four;
                         four=p1+p2+p3+p4;
                         float pt = four.Perp();
+                        float rapidity = four.Rapidity();
+                        if(rapidiyt>0.5 || rapidity<-0.5)   continue;
                         teraneutron->Fill(pt,1.0/(2.0*pi*0.05*pt));
                         paired.push_back(j);
                         paired.push_back(k);
@@ -110,3 +111,4 @@ void tetraNeutron(){
     c1->SaveAs("teraneutron.root");
     cout <<"done!" <<endl;    
 }
+t

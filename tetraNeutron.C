@@ -96,7 +96,6 @@ void tetraNeutron(){
                         paired.push_back(m);
                         result=true;
                         break;
-
                     }
                 }
 
@@ -111,4 +110,3 @@ void tetraNeutron(){
     c1->SaveAs("teraneutron.root");
     cout <<"done!" <<endl;    
 }
-t

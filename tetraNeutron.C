@@ -100,8 +100,9 @@ void tetraNeutron(){
                 }
 
             }
-            paired.clear();
+           
         }
+        paired.clear();
     }
     
     TCanvas *c1 = new TCanvas();

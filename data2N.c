@@ -14,16 +14,16 @@ void data2N(){
 
     hadronTree->SetBranchAddress("nMultiplicityTree",&nMultiplicityTree);
     hadronTree->SetBranchAddress("b",&b);
-    hadronTree->SetBranchAddress("id",&id);
-    hadronTree->SetBranchAddress("x",&x);
-    hadronTree->SetBranchAddress("y",&y);
-    hadronTree->SetBranchAddress("z",&z);
-    hadronTree->SetBranchAddress("px",&px);
-    hadronTree->SetBranchAddress("py",&py);
-    hadronTree->SetBranchAddress("pz",&pz);
-    hadronTree->SetBranchAddress("t",&t);
-    hadronTree->SetBranchAddress("mass",&mass);
-    hadronTree->SetBranchAddress("energy",&energy);
+    hadronTree->SetBranchAddress("id",id);
+    hadronTree->SetBranchAddress("x",x);
+    hadronTree->SetBranchAddress("y",y);
+    hadronTree->SetBranchAddress("z",z);
+    hadronTree->SetBranchAddress("px",px);
+    hadronTree->SetBranchAddress("py",py);
+    hadronTree->SetBranchAddress("pz",pz);
+    hadronTree->SetBranchAddress("t",t);
+    hadronTree->SetBranchAddress("mass",mass);
+    hadronTree->SetBranchAddress("energy",energy);
 
     //create a new tree to save neutron
     Int_t pid[maxMultiplicity];
@@ -36,16 +36,16 @@ void data2N(){
     TTree *neutron = new TTree("neutron","neutron"); 
     neutron->Branch("mult",&mult,"mult/I");
     neutron->Branch("impact",&impact,"impact/F");
-    neutron->Branch("pid",&pid,"pid[mult]/I");
-    neutron->Branch("fx",&fx,"fx[mult]/F");
-    neutron->Branch("fy",&fy,"fy[mult]/F");
-    neutron->Branch("fz",&fz,"fz[mult]/F");
-    neutron->Branch("fpx",&fpx,"fpx[mult]/F");
-    neutron->Branch("fpy",&fpy,"fpy[mult]/F");
-    neutron->Branch("fpz",&fpz,"fpz[mult]/F");
-    neutron->Branch("ft",&ft,"ft[mult]/F");
-    neutron->Branch("fmass",&fmass,"fmass[mult]/F");
-    neutron->Branch("fenergy",&fenergy,"fenergy[mult]/F");   
+    neutron->Branch("pid",pid,"pid[mult]/I");
+    neutron->Branch("fx",fx,"fx[mult]/F");
+    neutron->Branch("fy",fy,"fy[mult]/F");
+    neutron->Branch("fz",fz,"fz[mult]/F");
+    neutron->Branch("fpx",fpx,"fpx[mult]/F");
+    neutron->Branch("fpy",fpy,"fpy[mult]/F");
+    neutron->Branch("fpz",fpz,"fpz[mult]/F");
+    neutron->Branch("ft",ft,"ft[mult]/F");
+    neutron->Branch("fmass",fmass,"fmass[mult]/F");
+    neutron->Branch("fenergy",fenergy,"fenergy[mult]/F");   
 
 
     const Int_t nevent = (Int_t)hadronTree->GetEntries();

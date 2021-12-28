@@ -14,16 +14,16 @@ void data2N(){
 
     hadronTree->SetBranchAddress("nMultiplicityTree",&nMultiplicityTree);
     hadronTree->SetBranchAddress("b",&b);
-    hadronTree->SetBranchAddress("id",id);
-    hadronTree->SetBranchAddress("x",x);
-    hadronTree->SetBranchAddress("y",y);
-    hadronTree->SetBranchAddress("z",z);
-    hadronTree->SetBranchAddress("px",px);
-    hadronTree->SetBranchAddress("py",py);
-    hadronTree->SetBranchAddress("pz",pz);
-    hadronTree->SetBranchAddress("t",t);
-    hadronTree->SetBranchAddress("mass",mass);
-    hadronTree->SetBranchAddress("energy",energy);
+    hadronTree->SetBranchAddress("id",&id);
+    hadronTree->SetBranchAddress("x",&x);
+    hadronTree->SetBranchAddress("y",&y);
+    hadronTree->SetBranchAddress("z",&z);
+    hadronTree->SetBranchAddress("px",&px);
+    hadronTree->SetBranchAddress("py",&py);
+    hadronTree->SetBranchAddress("pz",&pz);
+    hadronTree->SetBranchAddress("t",&t);
+    hadronTree->SetBranchAddress("mass",&mass);
+    hadronTree->SetBranchAddress("energy",&energy);
 
     //create a new tree to save neutron
     Int_t pid[maxMultiplicity];
@@ -31,6 +31,7 @@ void data2N(){
     Float_t impact;
     Float_t fpx[maxMultiplicity],fpy[maxMultiplicity],fpz[maxMultiplicity];
     Float_t fx[maxMultiplicity],fy[maxMultiplicity],fz[maxMultiplicity],ft[maxMultiplicity],fmass[maxMultiplicity],fenergy[maxMultiplicity];
+   
     TFile *newFile = new TFile("onlyNeutron.root","RECREATE");
     TTree *neutron = new TTree("neutron","neutron"); 
     neutron->Branch("mult",&mult,"mult/I");
@@ -49,7 +50,7 @@ void data2N(){
 
     const Int_t nevent = (Int_t)hadronTree->GetEntries();
     for(Int_t i=0;i<nevent;i++){
-        hadronTree->GetEntry(nevent);
+        hadronTree->GetEntry(i);
         Int_t m=0;
         impact=b;
         for(Int_t j=0;j<nMultiplicityTree;j++){

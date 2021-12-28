@@ -25,7 +25,7 @@ void data2N(){
     hadronTree->SetBranchAddress("mass",mass);
     hadronTree->SetBranchAddress("energy",energy);
 
-    //create a new tree to save data after decay.
+    //create a new tree to save neutron
     Int_t pid[maxMultiplicity];
     Int_t mult;
     Float_t impact;

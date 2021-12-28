@@ -66,7 +66,7 @@ void data2N(){
             fenergy[m]=energy[j];
             m++;
         }
-        nmult=m;
+        mult=m;
         neutron->Fill();
     }
     newFile->Write();

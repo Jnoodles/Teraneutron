@@ -38,7 +38,7 @@ int main(){
     hadronTree->SetBranchAddress("px",px);
     hadronTree->SetBranchAddress("py",py);
     hadronTree->SetBranchAddress("pz",pz);
-    hadronTree->SetBranchAddress("t",&t);
+    hadronTree->SetBranchAddress("t",t);
     hadronTree->SetBranchAddress("mass",mass);
     hadronTree->SetBranchAddress("energy",energy);
 

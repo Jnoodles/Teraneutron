@@ -24,23 +24,23 @@ int main(){
     Float_t px[maxMultiplicity],py[maxMultiplicity],pz[maxMultiplicity];
     Float_t x[maxMultiplicity],y[maxMultiplicity],z[maxMultiplicity],t[maxMultiplicity],mass[maxMultiplicity],energy[maxMultiplicity];
 
-    TFile *hadronTreeFile = new TFile("afterART2005.root", "read");
-    TTree *hadronTree = (TTree*)hadronTreeFile->Get("hadronTree");
+    TFile *hadronTreeFile = new TFile("onlyNeutron.root", "read");
+    TTree *hadronTree = (TTree*)hadronTreeFile->Get("neutron");
 
 	TH1F *teraneutron = new TH1F("teraneutron","teranuetron",40,0.,2.0);
 
-    hadronTree->SetBranchAddress("nMultiplicityTree",&nMultiplicityTree);
-    hadronTree->SetBranchAddress("b",&b);
-    hadronTree->SetBranchAddress("id",id);
-    hadronTree->SetBranchAddress("x",x);
-    hadronTree->SetBranchAddress("y",y);
-    hadronTree->SetBranchAddress("z",z);
-    hadronTree->SetBranchAddress("px",px);
-    hadronTree->SetBranchAddress("py",py);
-    hadronTree->SetBranchAddress("pz",pz);
-    hadronTree->SetBranchAddress("t",t);
-    hadronTree->SetBranchAddress("mass",mass);
-    hadronTree->SetBranchAddress("energy",energy);
+    hadronTree->SetBranchAddress("mult",&nMultiplicityTree);
+    hadronTree->SetBranchAddress("impact",&b);
+    hadronTree->SetBranchAddress("pid",id);
+    hadronTree->SetBranchAddress("fx",x);
+    hadronTree->SetBranchAddress("fy",y);
+    hadronTree->SetBranchAddress("fz",z);
+    hadronTree->SetBranchAddress("fpx",px);
+    hadronTree->SetBranchAddress("fpy",py);
+    hadronTree->SetBranchAddress("fpz",pz);
+    hadronTree->SetBranchAddress("ft",t);
+    hadronTree->SetBranchAddress("fmass",mass);
+    hadronTree->SetBranchAddress("fenergy",energy);
 
 	const Int_t nentries=hadronTree->GetEntries();
 
@@ -76,7 +76,7 @@ int main(){
                     r3.SetPxPyPzE(x[l],y[l],z[l],t[l]);
                     if(coalescence(p1,p3,r1,r3,t[j],t[l])==false || coalescence(p2,p3,r2,r3,t[k],t[l])==false)  continue;
                     
-                    #pragma omp parallel
+                    #pragma omp parallel for
                     for(int m=l+1;m<nMultiplicityTree;m++){
                         //forth particle
                         if(result==true)    continue;
@@ -112,7 +112,7 @@ int main(){
     TCanvas *c1 = new TCanvas();
     teraneutron->Draw("e");
     teraneutron->GetXaxis()->SetTitle("p_{T} GeV");
-    teraneutron->GetYaxis()->SetTitle("#frac{dN^{2}}{2#pip_{T}}d^{2}N/dp_{T}dy");
+    teraneutron->GetYaxis()->SetTitle("#frac{dN^{2}}{2#pip_{T}dp_{T}dy}");
     TLegend *leg1 = new TLegend();
     leg1->AddEntry(teraneutron,"Tetraneutron");
     c1->Draw();

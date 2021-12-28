@@ -112,7 +112,7 @@ int main(){
     TCanvas *c1 = new TCanvas();
     teraneutron->Draw("e");
     teraneutron->GetXaxis()->SetTitle("p_{T} GeV");
-    teraneutron->GetYaxis()->SetTitle("#frac{1}{2#pip_{T}}d^{2}N/dp_{T}dy");
+    teraneutron->GetYaxis()->SetTitle("#frac{dN^{2}}{2#pip_{T}}d^{2}N/dp_{T}dy");
     TLegend *leg1 = new TLegend();
     leg1->AddEntry(teraneutron,"Tetraneutron");
     c1->Draw();

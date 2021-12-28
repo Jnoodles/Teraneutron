@@ -9,9 +9,9 @@
         ""
       ],
       "stopAtEntry": false,
-      "cwd": "c:/Users/Mr.Dong/Desktop/Teraneutron",
+      "cwd": "c:/Users/Mr.Dong/Desktop/teraneutron",
       "environment": [],
-      "program": "c:/Users/Mr.Dong/Desktop/Teraneutron/build/Debug/outDebug",
+      "program": "c:/Users/Mr.Dong/Desktop/teraneutron/build/Debug/outDebug",
       "internalConsoleOptions": "openOnSessionStart",
       "MIMode": "gdb",
       "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",

@@ -16,6 +16,9 @@
   "C_Cpp_Runner.enableWarnings": true,
   "C_Cpp_Runner.warningsAsError": false,
   "files.associations": {
-    "tetraNeutron.C": "cpp"
+    "tetraNeutron.C": "cpp",
+    "tetraNeutron [4].C": "cpp",
+    "tetraNeutron [5].C": "cpp",
+    "tetra3p1.C": "cpp"
   }
 }

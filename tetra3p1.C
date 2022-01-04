@@ -42,12 +42,14 @@
 using namespace std;
 
 int main(){
+
+    
 cout<<"                   _ooOoo_"<<endl;
 cout<<"                 o8888888o"<<endl;
 cout<<"      阿            88\" . \"88"<<endl;
 cout<<"      弥            (| -_- |)"<<endl;
 cout<<"      陀            O\\  =  /O"<<endl;
-cout<<"      佛         ____/\`---'\\____"<<endl;
+cout<<"               ____/\`---'\\____"<<endl;
 cout<<"             .'  \\\\|  %  |//  `."<<endl;
 cout<<"            /  \\\\|||  %  |||//  \\"<<endl;
 cout<<"           /  _||||| -%- |||||-  \\"<<endl;

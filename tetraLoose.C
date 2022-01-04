@@ -24,10 +24,14 @@ int main(){
     Float_t px[maxMultiplicity],py[maxMultiplicity],pz[maxMultiplicity];
     Float_t x[maxMultiplicity],y[maxMultiplicity],z[maxMultiplicity],t[maxMultiplicity],mass[maxMultiplicity],energy[maxMultiplicity];
 
-    TFile *hadronTreeFile = new TFile("onlyNeutron.root", "read");
-    TTree *hadronTree = (TTree*)hadronTreeFile->Get("neutron");
+    TChain *hadronTree = new TChain("neutron");
+    for(int i=0;i++i<20){
+        TString filename = "afterART2005_";
+        filename+=i;
+        filename+=".root";
+        hadronTree->Add(filename);
+    }
 
-	TH1F *teraneutron = new TH1F("teraneutron","teranuetron",40,0.,4);
 
     hadronTree->SetBranchAddress("mult",&nMultiplicityTree);
     hadronTree->SetBranchAddress("impact",&b);
@@ -41,6 +45,8 @@ int main(){
     hadronTree->SetBranchAddress("ft",t);
     hadronTree->SetBranchAddress("fmass",mass);
     hadronTree->SetBranchAddress("fenergy",energy);
+
+	TH1F *teraneutron = new TH1F("teraneutron","teranuetron",40,0.,4);
 
 	const Int_t nentries=hadronTree->GetEntries();
 
